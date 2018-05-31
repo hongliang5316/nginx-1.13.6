@@ -113,7 +113,7 @@ ngx_http_lua_ngx_req_raw_header(lua_State *L)
 
 #if (NGX_HTTP_V2)
     if (mr->stream) {
-        return luaL_error(L, "http2 requests not supported yet");
+        return luaL_error(L, "http v2 not supported yet");
     }
 #endif
 
@@ -245,7 +245,7 @@ ngx_http_lua_ngx_req_raw_header(lua_State *L)
 
         if (b != mr->header_in) {
             /* skip truncated header entries (if any) */
-            while (last > data && last[-1] != LF && last[-1] != '\0') {
+            while (last > data && last[-1] != LF) {
                 last--;
             }
         }
@@ -315,7 +315,7 @@ ngx_http_lua_ngx_req_raw_header(lua_State *L)
 
 #if 1
             /* skip truncated header entries (if any) */
-            while (last > p && last[-1] != LF && last[-1] != '\0') {
+            while (last > p && last[-1] != LF) {
                 last--;
             }
 #endif
@@ -325,7 +325,8 @@ ngx_http_lua_ngx_req_raw_header(lua_State *L)
                 if (*p == '\0') {
                     j++;
                     if (p + 1 == last) {
-                        *p = LF;
+                        /* XXX this should not happen */
+                        dd("found string end!!");
 
                     } else if (*(p + 1) == LF) {
                         *p = CR;

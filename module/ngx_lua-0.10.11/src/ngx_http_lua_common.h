@@ -79,20 +79,20 @@
 
 #define NGX_HTTP_LUA_INLINE_TAG "nhli_"
 
-#define NGX_HTTP_LUA_INLINE_TAG_LEN                                          \
+#define NGX_HTTP_LUA_INLINE_TAG_LEN \
     (sizeof(NGX_HTTP_LUA_INLINE_TAG) - 1)
 
-#define NGX_HTTP_LUA_INLINE_KEY_LEN                                          \
+#define NGX_HTTP_LUA_INLINE_KEY_LEN \
     (NGX_HTTP_LUA_INLINE_TAG_LEN + 2 * MD5_DIGEST_LENGTH)
 
 /* Nginx HTTP Lua File tag prefix */
 
 #define NGX_HTTP_LUA_FILE_TAG "nhlf_"
 
-#define NGX_HTTP_LUA_FILE_TAG_LEN                                            \
+#define NGX_HTTP_LUA_FILE_TAG_LEN \
     (sizeof(NGX_HTTP_LUA_FILE_TAG) - 1)
 
-#define NGX_HTTP_LUA_FILE_KEY_LEN                                            \
+#define NGX_HTTP_LUA_FILE_KEY_LEN \
     (NGX_HTTP_LUA_FILE_TAG_LEN + 2 * MD5_DIGEST_LENGTH)
 
 
@@ -162,7 +162,6 @@ typedef struct {
 
 struct ngx_http_lua_main_conf_s {
     lua_State           *lua;
-    ngx_pool_cleanup_t  *vm_cleanup;
 
     ngx_str_t            lua_path;
     ngx_str_t            lua_cpath;
